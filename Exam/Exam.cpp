@@ -32,8 +32,9 @@ public:
 	Book();
 	Book(const string& name_of_book, const string& genre, const int age_audience, const string& name, const string& surname, const int age_author, const size_t total_circulation, const int year_of_publication, const int number_of_books_sold);
 	Book(const Book& copy);
-	string Get_Name_of_Book()const;
-	Genre Get_Genre()const;
+	string Get_Name_of_Book() const;
+	Genre Get_Genre() const;
+	int Get_Year_of_Publication() const;
 	friend ostream& operator<<(ostream& os, const vector<Book>& books);
 	friend istream& operator>>(istream& is, vector<Book>& books);
 	~Book();
@@ -92,6 +93,11 @@ Genre Book::Get_Genre()const
 	return genre_book;
 }
 
+int Book::Get_Year_of_Publication() const
+{
+	return year_of_publication;
+}
+
 
 ostream& operator<<(ostream& os, const vector<Book>& books)
 {
@@ -122,7 +128,7 @@ istream& operator>>(istream& is, vector<Book>& books)
 		getline(is, books[i].genre_book.genre);
 		cout << "Enter age audience:\n";
 		is >> books[i].genre_book.age_audience;
-		if (books[i].genre_book.age_audience<0)
+		if (books[i].genre_book.age_audience < 0)
 		{
 			throw runtime_error("Error!\nInvalid input!\n");
 		}
@@ -140,7 +146,7 @@ istream& operator>>(istream& is, vector<Book>& books)
 		}
 		cout << "Enter total circulation:\n";
 		is >> books[i].total_circulation;
-		if (books[i].total_circulation<0)
+		if (books[i].total_circulation < 0)
 		{
 			throw runtime_error("Error!\nInvalid input!\n");
 		}
