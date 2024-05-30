@@ -35,6 +35,8 @@ public:
 	string Get_Name_of_Book() const;
 	Genre Get_Genre() const;
 	int Get_Year_of_Publication() const;
+	int Get_Age_Author() const;
+
 	friend ostream& operator<<(ostream& os, const vector<Book>& books);
 	friend istream& operator>>(istream& is, vector<Book>& books);
 	~Book();
@@ -98,6 +100,24 @@ int Book::Get_Year_of_Publication() const
 	return year_of_publication;
 }
 
+int Book::Get_Age_Author() const
+{
+	return autor_book.age_author;
+}
+
+
+double Average_age_authors(const vector<Book>& books)
+{
+	double sum_age = 0;
+	for (int i = 0; i < books.size(); i++)
+	{
+		sum_age += books[i].Get_Age_Author();
+	}
+
+	return sum_age / books.size();
+}
+
+
 
 ostream& operator<<(ostream& os, const vector<Book>& books)
 {
@@ -154,7 +174,7 @@ istream& operator>>(istream& is, vector<Book>& books)
 		is >> books[i].year_of_publication;
 		cout << "Enter number of books sold:\n";
 		is >> books[i].number_of_books_sold;
-		if (books[i].number_of_books_sold)
+		if (books[i].number_of_books_sold < 0)
 		{
 			throw runtime_error("Error!\nInvalid input!\n");
 		}
@@ -171,8 +191,9 @@ Book::~Book()
 int main()
 {
 	vector<Book> books(2);
-	/*cin >> books;*/
+	cin >> books;
 	cout << books;
+	cout << Average_age_authors(books) << endl;
 
 	return 0;
 }
