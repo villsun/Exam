@@ -36,7 +36,8 @@ public:
 	Genre Get_Genre() const;
 	int Get_Year_of_Publication() const;
 	int Get_Age_Author() const;
-	void Add_Author(vector<Book>& books, int index, const string& _name, const string& _surname, const int _age_author);
+	friend void Add_Author(vector<Book>& books, int index, const string& _name, const string& _surname, const int _age_author);
+	friend void Delete_Author(vector<Book>& books, int index);
 
 	friend ostream& operator<<(ostream& os, const vector<Book>& books);
 	friend istream& operator>>(istream& is, vector<Book>& books);
@@ -118,7 +119,7 @@ double Average_age_authors(const vector<Book>& books)
 	return sum_age / books.size();
 }
 
-void Book::Add_Author(vector<Book>& books, int index, const string& _name, const string& _surname, const int _age_author)
+void Add_Author(vector<Book>& books, int index, const string& _name, const string& _surname, const int _age_author)
 {
 	if (_age_author < 0 || books.empty() || index < 0)
 	{
@@ -129,6 +130,19 @@ void Book::Add_Author(vector<Book>& books, int index, const string& _name, const
 	books[index].autor_book.surname = _surname;
 	books[index].autor_book.age_author = _age_author;
 }
+
+void Delete_Author(vector<Book>& books, int index)
+{
+	if (books.empty() || index < 0)
+	{
+		throw runtime_error("Error!\nInvalid input!\n");
+	}
+
+	books[index].autor_book.name = "None";
+	books[index].autor_book.surname = "None";
+	books[index].autor_book.age_author = 0;
+}
+
 
 ostream& operator<<(ostream& os, const vector<Book>& books)
 {
@@ -205,6 +219,7 @@ int main()
 	cin >> books;
 	cout << books;
 	cout << Average_age_authors(books) << endl;
+
 
 	return 0;
 }
