@@ -39,6 +39,7 @@ public:
 	friend void Add_Author(vector<Book>& books, int index, const string& _name, const string& _surname, const int _age_author);
 	friend void Delete_Author(vector<Book>& books, int index);
 	friend Author Oldest_Author(vector<Book>& books);
+	friend double Percentage_sold_books_circulation(vector<Book>& books, int index);
 
 	friend ostream& operator<<(ostream& os, const vector<Book>& books);
 	friend istream& operator>>(istream& is, vector<Book>& books);
@@ -162,6 +163,16 @@ Author Oldest_Author(vector<Book>& books)
 	}
 
 	return books[index].autor_book;
+}
+
+double Percentage_sold_books_circulation(vector<Book>& books, int index)
+{
+	if (books.empty() || index < 0)
+	{
+		throw runtime_error("Error!\nInvalid input!\n");
+	}
+
+	return books[index].number_of_books_sold * 100 / books[index].total_circulation;
 }
 
 ostream& operator<<(ostream& os, const vector<Book>& books)
