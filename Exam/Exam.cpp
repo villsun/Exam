@@ -45,6 +45,8 @@ public:
 	friend istream& operator>>(istream& is, vector<Book>& books);
 	Book& operator =(const Book& other);
 	bool operator >(const Book& other);
+	Book& operator++();
+	Book operator++(int);
 	~Book();
 };
 
@@ -264,6 +266,19 @@ Book& Book::operator =(const Book& other)
 bool Book::operator>(const Book& other)
 {
 	return this->autor_book.age_author > other.autor_book.age_author;
+}
+
+Book& Book::operator++() 
+{
+	++this->year_of_publication;
+	return *this;
+}
+
+Book Book::operator++(int)
+{
+	Book temp = *this;
+	++(*this);
+	return temp;
 }
 
 Book::~Book()
