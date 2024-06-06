@@ -38,6 +38,7 @@ public:
 	int Get_Age_Author() const;
 	friend void Add_Author(vector<Book>& books, int index, const string& _name, const string& _surname, const int _age_author);
 	friend void Delete_Author(vector<Book>& books, int index);
+	friend Author Oldest_Author(vector<Book>& books);
 
 	friend ostream& operator<<(ostream& os, const vector<Book>& books);
 	friend istream& operator>>(istream& is, vector<Book>& books);
@@ -143,6 +144,25 @@ void Delete_Author(vector<Book>& books, int index)
 	books[index].autor_book.age_author = 0;
 }
 
+Author Oldest_Author(vector<Book>& books)
+{
+	if (books.empty())
+	{
+		throw runtime_error("Error!\nInvalid input!\n");
+	}
+	int age_author = books[0].autor_book.age_author;
+	int index = 0;
+	for (int i = 1; i < books.size(); i++)
+	{
+		if (age_author < books[i].autor_book.age_author)
+		{
+			age_author = books[i].autor_book.age_author;
+			index = i;
+		}
+	}
+
+	return books[index].autor_book;
+}
 
 ostream& operator<<(ostream& os, const vector<Book>& books)
 {
