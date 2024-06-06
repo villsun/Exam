@@ -44,6 +44,7 @@ public:
 	friend ostream& operator<<(ostream& os, const vector<Book>& books);
 	friend istream& operator>>(istream& is, vector<Book>& books);
 	Book& operator =(const Book& other);
+	bool operator >(const Book& other);
 	~Book();
 };
 
@@ -258,6 +259,11 @@ Book& Book::operator =(const Book& other)
 	this->number_of_books_sold = other.number_of_books_sold;
 
 	return *this;
+}
+
+bool Book::operator>(const Book& other)
+{
+	return this->autor_book.age_author > other.autor_book.age_author;
 }
 
 Book::~Book()
