@@ -43,6 +43,7 @@ public:
 
 	friend ostream& operator<<(ostream& os, const vector<Book>& books);
 	friend istream& operator>>(istream& is, vector<Book>& books);
+	Book& operator =(const Book& other);
 	~Book();
 };
 
@@ -237,6 +238,26 @@ istream& operator>>(istream& is, vector<Book>& books)
 	}
 
 	return is;
+}
+
+Book& Book::operator =(const Book& other)
+{
+	if (this == &other)
+	{
+		throw runtime_error("Error!\nInvalid input!\n");
+	}
+
+	this->name_of_book = other.name_of_book;
+	this->genre_book.genre = other.genre_book.genre;
+	this->genre_book.age_audience = other.genre_book.age_audience;
+	this->autor_book.name = other.autor_book.name;
+	this->autor_book.surname = other.autor_book.surname;
+	this->autor_book.age_author = other.autor_book.age_author;
+	this->total_circulation = other.total_circulation;
+	this->year_of_publication = other.year_of_publication;
+	this->number_of_books_sold = other.number_of_books_sold;
+
+	return *this;
 }
 
 Book::~Book()
