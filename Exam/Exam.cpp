@@ -289,9 +289,22 @@ Book::~Book()
 int main()
 {
 	vector<Book> books(2);
-	cin >> books;
-	cout << books;
-	cout << Average_age_authors(books) << endl;
+	try
+	{
+		cin >> books;
+		cout << books;
+		Genre a = books[0].Get_Genre();
+		cout << books[0].Get_Name_of_Book() << endl;
+		cout << books[0].Get_Year_of_Publication() << endl;
+		cout << Average_age_authors(books) << endl;
+		Add_Author(books, 0, "Joja", "Ioa", 23);
+		Delete_Author(books, 0);
+		Percentage_sold_books_circulation(books, 0);
+	}
+	catch (const runtime_error& exception)
+	{
+		cout << exception.what() << endl;
+	}
 
 
 	return 0;
